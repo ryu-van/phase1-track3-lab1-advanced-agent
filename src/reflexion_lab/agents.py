@@ -21,7 +21,7 @@ class BaseAgent:
             # TODO: Replace with actual latency measurement
             import os
             from .mock_runtime import LAST_CALL_METRICS
-            if os.environ.get("REFLEXION_MODE") in ("real", "ollama"):
+            if os.environ.get("REFLEXION_MODE") in ("real", "ollama", "gguf"):
                 token_estimate = LAST_CALL_METRICS["tokens"]
                 latency_ms = LAST_CALL_METRICS["latency_ms"]
             else:
@@ -43,7 +43,7 @@ class BaseAgent:
                 reflections.append(reflection)
                 reflection_memory.append(reflection.next_strategy)
                 trace.reflection = reflection
-                if os.environ.get("REFLEXION_MODE") in ("real", "ollama"):
+                if os.environ.get("REFLEXION_MODE") in ("real", "ollama", "gguf"):
                     trace.token_estimate = LAST_CALL_METRICS["tokens"]
                     trace.latency_ms = LAST_CALL_METRICS["latency_ms"]
             
